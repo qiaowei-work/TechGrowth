@@ -53,3 +53,22 @@ git fetch origin
 ```shell
 git checkout -b [远程分支名称] origin/[远程分支名称]
 ```
+
+## 情形三:本地有分支的情况,创建自己的开发分支(远程和本地)
+拉取最新内容
+```shell
+git fetch origin --prune  # 清理本地无效的远程分支缓存，重新拉取最新
+```
+切换本地到分支(dev_weiqiao),并获取远程分支(origin/release)最新的内容
+```shell
+# 方法1（推荐，无歧义）：使用switch命令
+git switch -c dev_weiqiao origin/release
+
+# 方法2（兼容旧版本Git）：使用checkout -b
+git checkout -b dev_weiqiao origin/release
+```
+绑定远程分支(如果没有就创建)
+```shell
+# 后续推送到远程并创建对应的远程分支(注意,适合远程没有对应分支(dev_weiqiao)的情况)
+git push -u origin dev_weiqiao
+```
